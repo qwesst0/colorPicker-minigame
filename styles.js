@@ -142,7 +142,7 @@ export const styles = StyleSheet.create({
         color: "#ffffff",
         fontSize: 18,
         fontWeight: "bold",
-        width: 30,
+        width: 40,
         textAlign: "right",
     },
 

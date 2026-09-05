@@ -130,7 +130,8 @@ export default function App() {
                         </View>
 
                         <View style={[styles.colorBox,
-                            {backgroundColor: isImpossible ? "#1a1a1a" : `rgb(${userColor.r}, ${userColor.g}, ${userColor.b})`},
+                            {backgroundColor: isImpossible ? "#1a1a1a"
+                                    : `rgb(${userColor.r}, ${userColor.g}, ${userColor.b})`},
                             isImpossible && styles.impossibleBox
                         ]}>
                             {isImpossible ? (
@@ -146,14 +147,15 @@ export default function App() {
                             <View style={styles.sliderRow} key={item.key}>
                                 <Text style={[styles.sliderLabel, {color: item.color}]}>{item.label}</Text>
                                 <Slider style={styles.slider}
-                                        onValueChange={(value) => setUserColor((prev) => ({ ...prev, [item.key]: value }))}
+                                        onValueChange={(value) => setUserColor((prev) =>
+                                            ({ ...prev, [item.key]: Math.round(value) || 0 }))}
                                         minimumValue={0} maximumValue={255} step={1}
                                         value={userColor[item.key]}
                                         minimumTrackTintColor={item.color} maximumTrackTintColor="#555555"
                                         thumbTintColor={item.color}
                                         disabled={!gameStarted || roundWon}
                                 />
-                                <Text style={styles.sliderValue}>{userColor[item.key]}</Text>
+                                <Text style={styles.sliderValue}>{userColor[item.key] ?? 0}</Text>
                             </View>
                         ))}
                     </View>
