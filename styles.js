@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#141414",
         paddingHorizontal: 15,
         justifyContent: "center",
+        alignItems: "center",
     },
     mainContent: {
         width: "100%",
@@ -95,8 +96,21 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginBottom: 20,
     },
+    box: {
+        flex: 1,
+        alignItems: "center",
+        marginHorizontal: 5,
+    },
+    boxLabel: {
+        color: "#aaaaaa",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 6,
+        textTransform: "uppercase",
+        letterSpacing: 2,
+    },
     colorBox: {
-        width: "48.5%",
+        width: "100%",
         height: 160,
         borderRadius: 12,
         borderWidth: 2,
@@ -113,6 +127,7 @@ export const styles = StyleSheet.create({
         color: "#ffe590",
         fontSize: 20,
         fontWeight: "bold",
+        textAlign: "center",
     },
     controlsContainer: {
         backgroundColor: "#1e1e1e",
@@ -136,13 +151,12 @@ export const styles = StyleSheet.create({
     sliderLabel: {
         fontSize: 20,
         fontWeight: "bold",
-        width: 20,
+        width: 35,
     },
     sliderValue: {
-        color: "#ffffff",
         fontSize: 18,
         fontWeight: "bold",
-        width: 40,
+        width: 35,
         textAlign: "right",
     },
 
@@ -195,5 +209,61 @@ export const styles = StyleSheet.create({
     },
     resultTextSuccess: {
         color: "#88ff88",
+    },
+
+
+    statsCard: {
+        backgroundColor: "#1e1e1e",
+        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: "#2a2a2a",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+    },
+    statsTitle: {
+        color: "#ffffff",
+        fontSize: 42,
+        fontWeight: "bold",
+        letterSpacing: 4,
+        textAlign: "center",
+        marginBottom: 24,
+        textTransform: "uppercase",
+
+    },
+    statRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingVertical: 18,
+        borderBottomWidth: 2,
+        borderBottomColor: "#2a2a2a",
+    },
+    statLabel: {
+        color: "#aaaaaa",
+        fontSize: 18,
+        fontWeight: "bold",
+        textTransform: "uppercase",
+        letterSpacing: 2,
+        marginEnd: 50
+    },
+    statValue: {
+        color: "#ffe590",
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+    resetButton: {
+        marginTop: 30,
+        width: "60%",
+        backgroundColor: "#2a1a1a",
+        borderColor: "#ff4444",
+        borderWidth: 1,
+        paddingVertical: 12,
+        borderRadius: 10,
+        alignItems: "center",
+    },
+    resetButtonText: {
+        color: "#ff6666",
+        fontSize: 18,
+        fontWeight: "bold",
     },
 });

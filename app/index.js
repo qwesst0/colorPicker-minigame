@@ -3,13 +3,14 @@ import {Text, View, TouchableOpacity} from "react-native";
 import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 import Slider from "@react-native-community/slider";
 import { styles } from "../styles";
+import { init, loadScores, saveScore } from "../db";
 
 const difficulties = {
     easy:       { label: "Легко", tolerance: 80, time: 20 },
     medium:     { label: "Нормально", tolerance: 50, time: 15 },
     hard:       { label: "Сложно", tolerance: 30, time: 10 },
     hardcore:   { label: "Хардкор", tolerance: 15, time: 7 },
-    impossible: { label: "Невозможно", tolerance: 5, time: 10 },
+    impossible: { label: "Невозможно", tolerance: 5, time: 7 },
 };
 const sliders = [
     { key: "r", label: "R", color: "#ff0000" },
@@ -57,8 +58,13 @@ export default function App() {
 
         const isSuccess = totalMiss <= currentTolerance;
         if (isSuccess) {
-            setScore((prev) => prev + 1);
+            const newScore = score + 1;
+            setScore(newScore);
             setRoundWon(true);
+
+            const currentScores = loadScores() || {};
+            const currentBest = currentScores[difficulty] || 0;
+            if (newScore > currentBest) saveScore(difficulty, newScore);
         }
         else {
             setGameOver(true);
@@ -121,24 +127,30 @@ export default function App() {
                     </View>
 
                     <View style={styles.comparisonContainer}>
-                        <View style={[styles.colorBox, (!gameStarted && !roundWon && !gameOver)
+                        <View style={styles.box}>
+                            <Text style={styles.boxLabel}>Цель</Text>
+                            <View style={[styles.colorBox, (!gameStarted && !roundWon && !gameOver)
                                 ? { backgroundColor: "#2a2a2a", justifyContent: "center", alignItems: "center" }
                                 : { backgroundColor: `rgb(${targetColor.r}, ${targetColor.g}, ${targetColor.b})` }]
-                        }>
-                            {!gameStarted && !roundWon && !gameOver &&
-                                (<Text style={{ fontSize: 130, color: "#888666", fontWeight: "bold" }}>?</Text>)}
+                            }>
+                                {!gameStarted && !roundWon && !gameOver &&
+                                    (<Text style={{ fontSize: 110, color: "#888666", fontWeight: "bold" }}>?</Text>)}
+                            </View>
                         </View>
 
-                        <View style={[styles.colorBox,
-                            {backgroundColor: isImpossible ? "#1a1a1a"
-                                    : `rgb(${userColor.r}, ${userColor.g}, ${userColor.b})`},
-                            isImpossible && styles.impossibleBox
-                        ]}>
-                            {isImpossible ? (
-                                <Text style={styles.impossibleRgbText}>
-                                    rgb({userColor.r}, {userColor.g}, {userColor.b})
-                                </Text>
-                            ) : null}
+                        <View style={styles.box}>
+                            <Text style={styles.boxLabel}>Ваш</Text>
+                            <View style={[styles.colorBox,
+                                {backgroundColor: isImpossible ? "#1a1a1a"
+                                        : `rgb(${userColor.r}, ${userColor.g}, ${userColor.b})`},
+                                isImpossible && styles.impossibleBox
+                            ]}>
+                                {isImpossible ? (
+                                    <Text style={styles.impossibleRgbText}>
+                                        rgb({userColor.r}, {userColor.g}, {userColor.b})
+                                    </Text>
+                                ) : null}
+                            </View>
                         </View>
                     </View>
 
@@ -155,7 +167,7 @@ export default function App() {
                                         thumbTintColor={item.color}
                                         disabled={!gameStarted || roundWon}
                                 />
-                                <Text style={styles.sliderValue}>{userColor[item.key] | 0}</Text>
+                                <Text style={[styles.sliderValue, {color: item.color}]}>{userColor[item.key] | 0}</Text>
                             </View>
                         ))}
                     </View>
