@@ -4,6 +4,7 @@
     "slug": "2",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "color-picker",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -27,7 +28,9 @@
     },
     "plugins": [
       "expo-router",
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-sharing",
+      "expo-status-bar"
     ]
   }
 }

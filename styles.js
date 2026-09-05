@@ -124,7 +124,7 @@ export const styles = StyleSheet.create({
     },
     slider: {
         flex: 1,
-        height: 35,
+        height: 30,
         marginHorizontal: 8,
     },
     sliderRow: {

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Text, View, TouchableOpacity} from "react-native";
 import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
 import Slider from "@react-native-community/slider";
-import { styles } from "./styles";
+import { styles } from "../styles";
 
 const difficulties = {
     easy:       { label: "Легко", tolerance: 80, time: 20 },
@@ -121,8 +121,14 @@ export default function App() {
                     </View>
 
                     <View style={styles.comparisonContainer}>
-                        <View style={[styles.colorBox,
-                            {backgroundColor: `rgb(${targetColor.r}, ${targetColor.g}, ${targetColor.b})`}]}/>
+                        <View style={[styles.colorBox, (!gameStarted && !roundWon && !gameOver)
+                                ? { backgroundColor: "#2a2a2a", justifyContent: "center", alignItems: "center" }
+                                : { backgroundColor: `rgb(${targetColor.r}, ${targetColor.g}, ${targetColor.b})` }]
+                        }>
+                            {!gameStarted && !roundWon && !gameOver &&
+                                (<Text style={{ fontSize: 130, color: "#888666", fontWeight: "bold" }}>?</Text>)}
+                        </View>
+
                         <View style={[styles.colorBox,
                             {backgroundColor: isImpossible ? "#1a1a1a" : `rgb(${userColor.r}, ${userColor.g}, ${userColor.b})`},
                             isImpossible && styles.impossibleBox
