@@ -148,14 +148,14 @@ export default function App() {
                                 <Text style={[styles.sliderLabel, {color: item.color}]}>{item.label}</Text>
                                 <Slider style={styles.slider}
                                         onValueChange={(value) => setUserColor((prev) =>
-                                            ({ ...prev, [item.key]: Math.round(value) || 0 }))}
+                                            ({ ...prev, [item.key]: value | 0 }))}
                                         minimumValue={0} maximumValue={255} step={1}
                                         value={userColor[item.key]}
                                         minimumTrackTintColor={item.color} maximumTrackTintColor="#555555"
                                         thumbTintColor={item.color}
                                         disabled={!gameStarted || roundWon}
                                 />
-                                <Text style={styles.sliderValue}>{userColor[item.key] ?? 0}</Text>
+                                <Text style={styles.sliderValue}>{userColor[item.key] | 0}</Text>
                             </View>
                         ))}
                     </View>
